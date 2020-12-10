@@ -64,6 +64,12 @@ const main = async() => {
   const dragImg = canvasImage.image;
   ctx.drawImage(dragImg, canvasImage.x, canvasImage.y);
   
+  // const min_cx = Math.min(dx, minX, maxX);
+  // const min_cy = Math.min(dy, minY, maxY);
+  
+  // const max_cx = Math.max(dx, minX, maxX);
+  // const max_cy = Math.max(dy, minY, maxY);
+
   const minX = 0;
   const minY = 0;
   const maxX = canvas.width - dragImg.width;
@@ -72,25 +78,11 @@ const main = async() => {
   draggle.store.set(canvas, ({type, x, y}) => {
     let dx = canvasImage.x + x;
     let dy = canvasImage.y + y;
-  
-    const min_cx = Math.min(dx, minX, maxX);
-    const min_cy = Math.min(dy, minY, maxY);
-    
-    const max_cx = Math.max(dx, minX, maxX);
-    const max_cy = Math.max(dy, minY, maxY);
 
-    if(dx > minX){
-      dx = 0;
-    }
-    if(dy > minY){
-      dy = 0;
-    }
-    if(dy < maxY){
-      dy = maxY;
-    }
-    if(dx < maxX){
-      dx = maxX;
-    }
+    if(dx > minX) dx = 0;
+    if(dy > minY) dy = 0;
+    if(dy < maxY) dy = maxY;
+    if(dx < maxX) dx = maxX;
     console.log(dx, dy);
     // console.log('dx:', dx, 'dy:', dy, 'min x:', min_cx, 'min y:', min_cy, 'max x:', max_cx, 'max y:', max_cy);
     ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -103,4 +95,3 @@ const main = async() => {
   app.appendChild(canvas);
 }
 main();
-
